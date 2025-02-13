@@ -8,8 +8,10 @@ class User:
         self.privileges = privileges
         self.email = email
         self.houses = []
-        if self not in User.users:
+        try:
             User.users.append(self)
+        except:
+            ValueError("User already exists.")
 
     @classmethod
     def create_blank(cls):
@@ -37,15 +39,31 @@ class User:
             print(f"User {self.username} removed successfully!")
 
         print("Final User List After Deletion:", User.users)
+
+
+    def update(self, name, username, phone, privileges, email):
+        try:
+            self.name = name
+            self.username = username
+            self.phone = phone
+            self.privileges = privileges
+            self.email = email
+            return f"User {self.username} updated successfully!"
+        except:
+            return ValueError("User update failed.")
+
     def to_dict(self):
-        return {
-            "name": self.name,
-            "username": self.username,
-            "phone": self.phone,
-            "privileges": self.privileges,
-            "email": self.email,
-            "houses": [house.to_dict() for house in self.houses]
-        }
+        try:
+            return {
+                "name": self.name,
+                "username": self.username,
+                "phone": self.phone,
+                "privileges": self.privileges,
+                "email": self.email,
+                "houses": [house.to_dict() for house in self.houses]
+            }
+        except:
+            return ValueError("User to_dict failed.")
 
 class House:
     houses = []
@@ -58,6 +76,8 @@ class House:
         self.rooms = []
         if owner:
             owner.houses.append(self)
+        else:
+            ValueError("House must have an owner.")
         House.houses.append(self)
 
     def create_blank(self):
@@ -72,15 +92,29 @@ class House:
 
         House.houses.remove(self)
 
+    def update(self, name, address, gps, owner):
+        try:
+            self.name = name
+            self.address = address
+            self.gps = gps
+            self.owner = owner
+            message = f"House {self.name} updated successfully!"
+            return message
+        except:
+            return ValueError("House update failed.")
+
 
     def to_dict(self):
-        return {
-            "name": self.name,
-            "address": self.address,
-            "gps": self.gps,
-            "owner": self.owner.username if self.owner else None,  # FIX: Store only username, not full object
-            "rooms": [room.to_dict() for room in self.rooms]
-        }
+        try:
+            return {
+                "name": self.name,
+                "address": self.address,
+                "gps": self.gps,
+                "owner": self.owner.username if self.owner else None,  # FIX: Store only username, not full object
+                "rooms": [room.to_dict() for room in self.rooms]
+            }
+        except:
+            return ValueError("House to_dict failed.")
 
 
 
@@ -108,16 +142,30 @@ class Room:
         if self.house:
             self.house.rooms.remove(self)
         Room.rooms.remove(self)
+    def update(self, name, floor, size, house, room_type):
+        try:
+            self.name = name
+            self.floor = floor
+            self.size = size
+            self.house = house
+            self.room_type = room_type
+            message = f"Room {self.name} updated successfully!"
+            return message
+        except:
+            return ValueError("Room update failed.")
 
     def to_dict(self):
-        return {
-            "name": self.name,
-            "floor": self.floor,
-            "size": self.size,
-            "house": self.house.name if self.house else None,  # FIX: Store house name, not full object
-            "room_type": self.room_type,
-            "devices": [device.to_dict() for device in self.devices]
-        }
+        try:
+            return {
+                "name": self.name,
+                "floor": self.floor,
+                "size": self.size,
+                "house": self.house.name if self.house else None,  # FIX: Store house name, not full object
+                "room_type": self.room_type,
+                "devices": [device.to_dict() for device in self.devices]
+            }
+        except:
+            return ValueError("Room to_dict failed.")
 
 
 
@@ -145,12 +193,28 @@ class Device:
             self.room.devices.remove(self)
         Device.devices.remove(self)
 
+    def update(self, device_type, name, room, settings, data, status):
+        try:
+            self.device_type = device_type
+            self.name = name
+            self.room = room
+            self.settings = settings
+            self.data = data
+            self.status = status
+            message = f"Device {self.name} updated successfully!"
+            return message
+        except:
+            return ValueError("Device update failed.")
+
     def to_dict(self):
-        return {
-            "device_type": self.device_type,
-            "name": self.name,
-            "room": self.room.to_dict() if self.room else None,
-            "settings": self.settings,
-            "data": self.data,
-            "status": self.status
-        }
+        try:
+            return {
+                "device_type": self.device_type,
+                "name": self.name,
+                "settings": self.settings,
+                "data": self.data,
+                "status": self.status
+            }
+        except:
+            return ValueError("Device to_dict failed.")
+

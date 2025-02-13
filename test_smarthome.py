@@ -141,7 +141,6 @@ def test_delete_house(setup_data):
     house.delete()
     assert len(user.houses) == 0
 
-
 def test_create_blank_user():
     print("Before Creating Blank User:", len(User.users))
     user = User().create_blank()
@@ -158,3 +157,89 @@ def test_delete_user(setup_data):
     print("After Delete:", len(User.users), User.users)  # Should be 0 now
 
     assert len(User.users) == 0
+
+def test_update_house_2(setup_data):
+    _, house, _, _ = setup_data
+    house.update("Alice's House", "123 Main St", "40.7128° N, 74.0060° W", None)
+    assert house.name == "Alice's House"
+    assert house.address == "123 Main St"
+    assert house.gps == "40.7128° N, 74.0060° W"
+
+def test_update_device_2(setup_data):
+    _, _, _, device = setup_data
+    device.update("thermostat", "Nest Thermostat", None, {"temperature": 72}, {"last_update": "2025-02-12"}, "active")
+    assert device.device_type == "thermostat"
+    assert device.name == "Nest Thermostat"
+    assert device.settings == {"temperature": 72}
+    assert device.data == {"last_update": "2025-02-12"}
+    assert device.status == "active"
+
+
+def test_user_to_dict():
+    user = User(
+        name="John Doe",
+        username="jdoe",
+        phone="123-456-7890",
+        privileges="admin",
+        email="jdoe@example.com"
+    )
+    
+    house = House(
+        name="Doe's House",
+        address="123 Main St",
+        gps="40.7128,-74.0060",
+        owner=user
+    )
+    
+    room = Room(
+        name="Living Room",
+        floor=1,
+        size=200,
+        house=house,
+        room_type="Common Area"
+    )
+    
+    device = Device(
+        device_type="Light",
+        name="Smart Bulb",
+        room=room,
+        settings={"brightness": 80},
+        data={},
+        status="on"
+    )
+    
+    expected_dict = {
+        "name": "John Doe",
+        "username": "jdoe",
+        "phone": "123-456-7890",
+        "privileges": "admin",
+        "email": "jdoe@example.com",
+        "houses": [
+            {
+                "name": "Doe's House",
+                "address": "123 Main St",
+                "gps": "40.7128,-74.0060",
+                "owner": "jdoe",
+                "rooms": [
+                    {
+                        "name": "Living Room",
+                        "floor": 1,
+                        "size": 200,
+                        "house": "Doe's House",
+                        "room_type": "Common Area",
+                        "devices": [
+                            {
+                                "device_type": "Light",
+                                "name": "Smart Bulb",
+                                "settings": {"brightness": 80},
+                                "data": {},
+                                "status": "on"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+    
+    assert user.to_dict() == expected_dict
