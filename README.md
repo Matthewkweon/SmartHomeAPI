@@ -2,12 +2,6 @@
 ## Overview
 This project provides a structured system for managing a smart home, including users, houses, rooms, and devices. The system is built using Python and includes object-oriented classes that allow the creation, modification, and deletion of entities within the home. Additionally, unit tests are provided using pytest to ensure system functionality.
 
-## Features
-User Management: Create, update, and delete users with associated houses.
-House Management: Assign houses to users, update details, and remove houses.
-Room Management: Add rooms to houses, modify attributes, and delete rooms.
-Device Management: Assign devices to rooms, update configurations, and remove devices.
-Data Serialization: Convert objects into dictionaries for JSON storage or API responses.
 
 ## System Structure
 
@@ -38,7 +32,6 @@ The system follows a hierarchical structure:
    - Represents a smart device
    - Located in a specific room
    - Attributes: device type, name, settings, data, status
-
 
 ## Project Structure
 ```python
