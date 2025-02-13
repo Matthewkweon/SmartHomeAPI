@@ -153,4 +153,4 @@ class Device:
             "settings": self.settings,
             "data": self.data,
             "status": self.status
-        }
+        }# test test
