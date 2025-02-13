@@ -117,6 +117,8 @@ Navigate to the project directory and run:
 pytest test_smarthome.py -v
 ```
 
+You can also run your own tests. You just need to make a function within test_smarthome.py and run the command above. 
+
 Expected Output:
 ```bash
 ================== test session starts ==================
@@ -125,5 +127,5 @@ test_smarthome.py::test_create_blank_house PASSED
 test_smarthome.py::test_create_blank_room PASSED
 test_smarthome.py::test_create_blank_device PASSED
 ...
-================== 12 passed in 0.12s ==================
+================== 15 passed in 0.12s ==================
 ```
