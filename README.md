@@ -1,6 +1,6 @@
 # Smart Home API & Structure
 ## Overview
-This project provides a structured system for managing a smart home, including users, houses, rooms, and devices. The system is built using Python and includes object-oriented classes that allow the creation, modification, and deletion of entities within the home. Additionally, unit tests are provided using pytest to ensure system functionality.
+This project provides a structured system for managing a smart home, including users, houses, rooms, and devices. The system is built using Python and includes object-oriented classes that allow the creation, modification, and deletion of entities within the home. Additionally, unit tests are provided using pytest to ensure system functionality. I tried to make sure that each of the functions were tested individually and fit together as one. You will see that I implemented a sort of heirarchical structure where each class can affect one another. 
 
 
 ## System Structure
