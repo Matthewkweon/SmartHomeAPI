@@ -48,7 +48,7 @@ The system follows a hierarchical structure:
 │── README.md        # Project documentation
 ```
 
-
+First, install pytest:
 ```python
 pip install pytest
 ```
@@ -74,6 +74,8 @@ device = Device(device_type="thermostat", name="Nest Thermostat", room=room, set
 print(user.to_dict())
 ```
 
+
+#### Output
 ```python
 {
     "name": "Alice",
