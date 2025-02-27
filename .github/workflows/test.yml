@@ -28,3 +28,4 @@ jobs:
 
     - name: Run tests
       run: pytest test_smarthome.py --maxfail=1 --disable-warnings -q
+      run: pytest test_smarthome_api.py --maxfail=1 --disable-warnings -q
