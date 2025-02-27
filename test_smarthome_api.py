@@ -1,6 +1,6 @@
 import pytest
 from fastapi.testclient import TestClient
-from smartphone_api import app
+from smarthome_api import app
 
 # Create a TestClient instance using our FastAPI app
 client = TestClient(app)
